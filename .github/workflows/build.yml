@@ -11,12 +11,12 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Setup Gradle
+      - name: Setup Gradle and Build
         run: |
           wget -q https://services.gradle.org/distributions/gradle-8.2-bin.zip -P /tmp
           unzip -q /tmp/gradle-8.2-bin.zip -d /opt
           export PATH=/opt/gradle-8.2/bin:$PATH
-          gradle assembleDebug
+          gradle assembleDebug --stacktrace 2>&1 | tail -50
       - uses: actions/upload-artifact@v4
         with:
           name: BTChanger-debug
